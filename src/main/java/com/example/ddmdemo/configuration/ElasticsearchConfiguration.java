@@ -1,12 +1,14 @@
 package com.example.ddmdemo.configuration;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "rs.teslaris.core.indexrepository")
+@RequiredArgsConstructor
+@EnableElasticsearchRepositories(basePackages = "com.example.ddmdemo.indexrepository")
 public class ElasticsearchConfiguration
     extends org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration {
 

@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import org.springframework.data.elasticsearch.annotations.Setting;
+import org.springframework.data.elasticsearch.annotations.*;
+import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
 @Getter
 @Setter
@@ -17,6 +15,7 @@ import org.springframework.data.elasticsearch.annotations.Setting;
 @Document(indexName = "dummy_index")
 @Setting(settingPath = "/configuration/serbian-analyzer-config.json")
 public class DummyIndex {
+    public static final String SERBIAN_ANALYZER = "serbian_simple";
 
     @Id
     private String id;
@@ -30,9 +29,40 @@ public class DummyIndex {
     @Field(type = FieldType.Text, store = true, name = "content_en", analyzer = "english", searchAnalyzer = "english")
     private String contentEn;
 
+    @Field(type = FieldType.Text, store = true, name = "signatory_name")
+    private String signatoryName;
+
+    @Field(type = FieldType.Text, store = true, name = "signatory_lastname")
+    private String signatoryLastname;
+
+    @Field(type = FieldType.Text, store = true, name = "government_name")
+    private String governmentName;
+
+    @Field(type = FieldType.Text, store = true, name = "government_level")
+    private String governmentLevel;
+
+    @Field(type = FieldType.Text, index = false, store = true)
+    private String address;
+
+    @GeoPointField
+    private GeoPoint governmentCoordinate;
+
     @Field(type = FieldType.Text, store = true, name = "server_filename", index = false)
     private String serverFilename;
 
     @Field(type = FieldType.Integer, store = true, name = "database_id")
     private Integer databaseId;
+
+    @Field(type = FieldType.Text, store = true, analyzer = "serbian_simple", searchAnalyzer = "serbian_simple")
+    private String lawText;
+
+    @Field(type = FieldType.Text, store = true, analyzer = "serbian_simple", searchAnalyzer = "serbian_simple")
+    private String lawFilename;
+
+    @Field(type = FieldType.Text, store = true, analyzer = "serbian_simple", searchAnalyzer = "serbian_simple")
+    private String contractText;
+
+    @Field(type = FieldType.Text, store = true, analyzer = "serbian_simple", searchAnalyzer = "serbian_simple")
+    private String contractFilename;
+
 }

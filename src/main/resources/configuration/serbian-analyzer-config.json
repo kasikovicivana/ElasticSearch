@@ -7,7 +7,9 @@
         "filter": [
           "serbian_cyrillic_to_latinic",
           "icu_folding",
-          "lowercase"
+          "lowercase",
+          "serbian_stop",
+          "serbian_stemmer"
         ]
       }
     },
@@ -15,6 +17,14 @@
       "serbian_cyrillic_to_latinic": {
         "type": "icu_transform",
         "id": "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC"
+      },
+      "serbian_stop": {
+        "type": "stop",
+        "stopwords": "_serbian_"
+      },
+      "serbian_stemmer": {
+        "type": "stemmer",
+        "language": "serbian"
       }
     }
   }
