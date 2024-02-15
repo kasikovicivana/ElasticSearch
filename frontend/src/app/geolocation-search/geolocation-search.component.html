@@ -1,0 +1,27 @@
+<div id="header" style="margin: auto">
+
+    <br>
+    <div class="container">
+      <div id="searchbar">
+        <input id="searchbartext" type="text" class="input is-primary" placeholder="Enter city name" [(ngModel)]="city" style="margin:0 0px 50px 0"/>
+        <input id="searchbartext" type="number" min="1" class="input is-primary" placeholder="Enter radius" [(ngModel)]="radius" />
+      </div>
+
+      <button id="searchbarbutton" style="width: 50px;" (click)="findByGeolocation()" class="button is-primary"
+        style="margin: auto; display: flex; justify-content: center;">
+
+        <span style="margin: auto; font-size: unset;">Search</span>
+      </button><br>
+    </div>
+  </div>
+  <div>
+    <div *ngIf="noResponseGeoSearch">
+      <br>
+      <h4  style="display: flex; margin: auto; justify-content: center;"><b>No results</b></h4>
+    </div>
+    <div class="searchresult" *ngFor="let res of geoResults">
+      <h2>Results: </h2><br/>
+      Document: <a (click)="download(res.filename)">{{res.filename}}</a><br>
+     <span><i>{{res.highlighter}}</i></span>
+    </div>
+  </div>

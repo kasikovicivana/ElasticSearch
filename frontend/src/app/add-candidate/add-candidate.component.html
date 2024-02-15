@@ -1,0 +1,52 @@
+<div class="content" role="main">
+
+
+    <div id="header">
+      <div style="margin-top: 30pt; margin: auto; display: flex; justify-content: center;">
+        <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+          <div class="form-group">
+            <label for="cv"><strong>Choose document type:</strong></label>
+            <br/>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" [(ngModel)]="lawChecked" name="checkboxLaw" id="checkboxLaw" (change)="onCheckboxChange('law')"> Law
+              </label>
+            </div>
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" [(ngModel)]="contractChecked" name="checkboxContract" id="checkboxContract" (change)="onCheckboxChange('contract')"> Contract
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="document"><strong>Document</strong></label>
+            <input class="form-control" id="document" type="file" accept="application/pdf" ng2FileSelect
+                   (change)="onFileSelected($event)" [uploader]="uploader" placeholder="" required name="document" />
+            <br>
+          </div>
+        <button type="submit" class="btn btn-success" [disabled]="!signupForm.form.valid"
+            style="margin-top: 40px;margin: auto; display: flex; justify-content: center;">Submit</button>
+        </form>
+      </div>
+      <br><br>
+
+      <div style="margin: 100px; display: flow; justify-content: center;" *ngIf="resultsFetched">
+        <h6>Parsed data:</h6>
+        <label for="signatoryName">Signatory name:</label>
+        <span id="signatoryName" [innerHtml]="res.name"></span><br/>
+        <label for="signatoryLastname">Signatory lastname:</label>
+        <span id="signatoryLastname" [innerHtml]="res.surname"></span><br/>
+        <label for="governmentName">Government name:</label>
+        <span id="governmentName" [innerHtml]="res.govName"></span><br/>
+        <label for="govLevel">Government level:</label>
+        <span id="govLevel" [innerHtml]="res.govLevel"></span><br/>
+        <label for="govAddress">Government address:</label>
+        <span id="govAddress" [innerHtml]="res.address"></span><br/>
+        <label for="content">Document content:</label>
+        <span id="content" [innerHtml]="res.content"></span>
+      </div>
+
+
+    </div>
+  </div>

@@ -1,0 +1,55 @@
+<div id="header" >
+    <h1 style="display: flex; margin: auto; justify-content: center; margin-bottom: 10px;">Search</h1><br>
+    <div>
+      <div ng-app="app">
+        <div class="container">
+           <div *ngFor="let ps of sortBy()" class="row">
+            <span *ngIf="ps.position!=1" class="select is-primary">
+              <select [(ngModel)]="ps.searchType" >
+                <option value="or">or</option>
+                <option value="and">and</option>
+                <option value="not">not</option>
+              </select>
+            </span>
+            <span class="select is-primary">
+              <select [(ngModel)]="ps.field">
+                <option value="">Pick property</option>
+                <option value="signatoryName">signatoryName</option>
+                <option value="signatoryLastname">signatoryLastname</option>
+                <option value="governmentName">governmentName</option>
+                <option value="governmentLevel">governmentLevel</option>
+                <option value="content">content</option>
+              </select>
+            </span>
+
+             <input [(ngModel)]="ps.value" class="input is-primary">
+             <button (click)="deleteRow(ps.position)" *ngIf="ps.position!=1" class="button is-danger">Delete</button>
+           </div>
+           <hr>
+           <div><button (click)="addRow()" class="button is-link" >Add Query</button></div>
+           <hr>
+
+        </div>
+      </div>
+
+      <button id="searchbarbutton" style="width: 50px;" (click)="searching()"
+        style="margin: auto; display: flex; justify-content: center;" class="button is-primary">
+
+        Search
+      </button><br>
+
+    </div>
+  </div>
+
+
+
+  <div *ngIf="noResponseAdvSearch">
+    <br>
+    <h4 style="display: flex; margin: auto; justify-content: center;"><b>No results</b></h4>
+  </div>
+  <div style="margin: 100px" *ngFor="let res of results">
+    <h2>Results: </h2><br/>
+    Document: <a (click)="download(res.filename)">{{res.filename}}</a><br>
+    <span [innerHtml]="res.highlighter"></span>
+  </div>
+
